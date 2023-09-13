@@ -47,14 +47,18 @@ class Wimdo(qtw.QMainWindow):
         layout_scenes = qtw.QVBoxLayout()
         row_layout_scenes = qtw.QHBoxLayout()
 
-        row_layout_scenes_1 = qtw.QHBoxLayout()
+
         new_scene = qtw. QPushButton('new scene')
         load_scene = qtw.QPushButton('load scene')
         im_to_scene = qtw.QPushButton('import to scene')
-        im_to_scene.clicked.connect(lambda: qtings.load_to_scene(self, displayed_scene))
-        new_scene.clicked.connect(lambda: qtings.display_scene_pop(self))
-        run = qtw.QPushButton('RUN')
         save_scene = qtw.QPushButton('save scene')
+
+        new_scene.clicked.connect(lambda: qtings.display_scene_pop(self))
+        im_to_scene.clicked.connect(lambda: qtings.load_to_scene(self, displayed_scene))
+        save_scene.clicked.connect(lambda: qtings.save_scene(self, displayed_scene))
+        
+        run = qtw.QPushButton('RUN')
+        
         row_layout_scenes.addWidget(new_scene)
         row_layout_scenes.addWidget(load_scene)
         row_layout_scenes.addWidget(im_to_scene)
@@ -62,19 +66,24 @@ class Wimdo(qtw.QMainWindow):
         
         layout_scenes.addLayout(row_layout_scenes)
         layout_scenes.addWidget(run)
+        col_layout_scenes_1 = qtw.QVBoxLayout()
+        row_layout_scenes_1 = qtw.QHBoxLayout()
 
-        row_layout_scenes_2 = qtw.QHBoxLayout()
         coords = qtings.coordBox(parent = None)
+        del_button = qtw.QPushButton('delete item')
+
         displayed_scene = qtings.GS(parent = None)
         displayed_scene.addText('make a scene!')
 
         view = qtw.QGraphicsView(displayed_scene, parent=None)
 
-        row_layout_scenes_2.addWidget(coords)
-        row_layout_scenes_2.addWidget(view)
+        col_layout_scenes_1.addWidget(coords)
+        col_layout_scenes_1.addWidget(del_button)
+        row_layout_scenes_1.addLayout(col_layout_scenes_1)
+        row_layout_scenes_1.addWidget(view)
         
 
-        layout_scenes.addLayout(row_layout_scenes_2)
+        layout_scenes.addLayout(row_layout_scenes_1)
 
         main_layout.addLayout(layout_imports)
         main_layout.addLayout(layout_scenes)

@@ -80,7 +80,7 @@ def save_scene(self, scene):
     #identify location of all different images
     #adds info to the scene file
     scene_imgs = scene.items
-    print(scene_imgs.mapFromScene)
+    print(scene_imgs)
 
 
 ####################################################################
@@ -154,8 +154,6 @@ class QGIPics(qtw.QGraphicsPixmapItem):
 ####################################################################
 
 class GS(qtw.QGraphicsScene):
-
-    curr_coords = []
 
     def __init__(self, parent):
 
